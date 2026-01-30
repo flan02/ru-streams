@@ -7,3 +7,9 @@ When working with GitHub, there are several ways to manage your code repositorie
 |Clone directo|Tu PC|No|No (solo local)|
 |Fork + Clone|Tu GitHub + Tu PC|Sí|Sí|
 |Repo Propio (Manual)|Tu GitHub + Tu PC|Sí|Sí|
+
+## Redis meaning
+
+RE: Remote
+DI: Dictionary
+S: Server
