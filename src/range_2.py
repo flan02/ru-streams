@@ -12,7 +12,7 @@ if __name__ == "__main__":
     n_sum = 0
 
     while True:
-        # Get the next batch of messages
+        # ? Get the next batch of messages
         msgs = redis.xrevrange(key, max=last_id, min="-", count=5)
 
         # An empty response means we've exhausted the Stream
@@ -28,3 +28,17 @@ if __name__ == "__main__":
         last_id = decr_id(last_id)
 
     print(f"The **reverse sum** of the Natural Numbers Stream is still {n_sum}")
+
+    """
+    _summary_
+ 
+    How do the XRANGE and XREVRANGE commands differ? Pick two answers:
+
+    ✔ the order of the 'start' and 'end' ID arguments
+
+    X the order of fields returned in each message
+
+    ✔ the order of messages returned
+
+    X the time complexity of the range operation
+    """

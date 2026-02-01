@@ -1,32 +1,33 @@
-'''
+"""
 Redis connection utilities
-'''
+"""
 
 import os
 from redis import Redis
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def get_connection(name=None):
-    '''Returns an optionally-named connection to Redis'''
-    HOST = os.environ.get("REDIS_HOST", "localhost")
-    PORT = os.environ.get("REDIS_PORT", 6379)
-    USERNAME = os.environ.get("REDIS_USER")
-    PASSWORD = os.environ.get("REDIS_PASSWORD")
+    """Configura y retorna el cliente de Redis."""
+    host = os.getenv("REDIS_HOST", "localhost")
+    port = int(os.getenv("REDIS_PORT", 18601))
+    username = os.getenv("REDIS_USER", "default")
+    password = os.getenv("REDIS_PASSWORD")
 
     client_kwargs = {
-        "host": HOST,
-        "port": PORT,
-        "decode_responses": True
+        "host": host,
+        "port": port,
+        "decode_responses": True,
+        "username": username,
+        "password": password,
     }
 
-    if USERNAME:
-        client_kwargs["username"] = USERNAME
+    return Redis(**client_kwargs)
 
-    if PASSWORD:
-        client_kwargs["password"] = PASSWORD
 
-    redis = Redis(**client_kwargs)
+# Instancia única para usar en todo el curso
+redis_client = get_connection()
 
-    if name is not None:
-        redis.client_setname(name)
-
-    return redis
+__all__ = ["redis_client"]
