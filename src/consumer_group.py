@@ -127,3 +127,23 @@ if __name__ == "__main__":
 
     Thread(target=chaos_func, args=(consumers,)).start()
     producer_func()
+
+# * Alternativa para Windows:
+# if __name__ == "__main__":
+#     setup()
+
+#     consumers = []
+#     # IMPORTANTE: En Windows, lanzamos los procesos aquí
+#     # para que el 'scope' sea claro
+#     for i in range(MEMBERS):
+#         name = f"BOB-{i}"
+#         p = Process(target=consumer_func, args=(name,))
+#         p.start()
+#         consumers.append((name, p))
+
+#     # El thread de caos puede correr tranquilo
+#     t = Thread(target=chaos_func, args=(consumers,))
+#     t.daemon = True # Para que se cierre si matás el programa principal
+#     t.start()
+
+#     producer_func()
